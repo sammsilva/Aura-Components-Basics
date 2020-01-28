@@ -1,0 +1,14 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global">
+    <aura:attribute name="item" type="Camping_Item__c"  default="{
+        'Name':'Item1',
+        'Quantity__c':10,
+        'Price__c':100,
+        'Packed__c':false}"/>
+    
+    <p>Name: {!v.item.Name}</p>
+    <p>Quantity: <lightning:formattedNumber value="{!v.item.Quantity__c}" style="decimal" maximumFractionDigits="0"/></p>
+    <p>Price: <lightning:formattedNumber value="{!v.item.Price__c}" style="currency" currencyCode="USD"/></p>  <!-- -->
+    <lightning:input type="toggle" label="Packed" name="togglePacked" checked="{!v.item.Packed__c}"/>
+    <lightning:button variant="brand" label="Packed!" title="Packed" onclick="{!c.packItem}" disabled="false"/>
+
+</aura:component>

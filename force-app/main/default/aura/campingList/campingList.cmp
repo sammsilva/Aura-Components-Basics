@@ -1,7 +1,27 @@
 <aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global">
-    <ol>
-        <li>Bug Spray</li>
-        <li>Bear Repellant</li>
-        <li>Goat Food</li>
-    </ol>
+    
+    <aura:attribute name="item" type="Camping_Item__c"/>
+
+    <!-- CREATE ITEM FORM -->
+    <form class="slds-form--stacked" aura:id="itemForm"> 
+        <lightning:input label="Item Name"
+                         name="itemName"
+                         required="true"/>   
+
+        <lightning:input label="Quantity"
+                         name="itemQuantity"
+                         type="number"                        
+                         required="true"/>  
+
+        <lightning:input label="Price"
+                         name="itemPrice"                       
+                         required="true"/>     
+
+        <lightning:button label="Insert Item" 
+                          class="slds-m-top--medium"
+                          variant="brand"
+                          onclick=""/>
+    </form>
+    <!-- / CREATE ITEM FORM -->
+
 </aura:component>	

@@ -1,3 +1,19 @@
 <aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global">
-    <h1>Camping List</h1>
+    
+
+    <lightning:layout  class="slds-page-header"> 
+
+        <div style="margin-right: 1rem;">
+            <lightning:layoutItem>
+            <lightning:icon iconName="standard:picklist_choice" alternativeText="My Camping Items"/>            
+            </lightning:layoutItem>
+        </div>
+
+        <div>
+            <lightning:layoutItem>
+                <h1>Camping List</h1>          
+            </lightning:layoutItem>
+        </div>
+    </lightning:layout>
+ 
 </aura:component>	

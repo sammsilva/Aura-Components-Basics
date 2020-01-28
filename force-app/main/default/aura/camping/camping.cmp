@@ -1,4 +1,5 @@
 <aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global">
     <c:campingHeader/> 
     <c:campingList/>
+    <c:campingListItem/>
 </aura:component>	
