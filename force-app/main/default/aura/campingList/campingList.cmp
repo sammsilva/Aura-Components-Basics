@@ -6,16 +6,19 @@
     <form class="slds-form--stacked" aura:id="itemForm"> 
         <lightning:input label="Item Name"
                          name="itemName"
-                         required="true"/>   
-
+                         required="true"
+                         class="slds-col slds-size_1-of-3"/>   
+                         
         <lightning:input label="Quantity"
                          name="itemQuantity"
                          type="number"                        
-                         required="true"/>  
+                         required="true"
+                         class="slds-col slds-size_1-of-12"/>  
 
         <lightning:input label="Price"
                          name="itemPrice"                       
-                         required="true"/>     
+                         required="true"
+                         class="slds-col slds-size_1-of-12"/>     
 
         <lightning:button label="Insert Item" 
                           class="slds-m-top--medium"
