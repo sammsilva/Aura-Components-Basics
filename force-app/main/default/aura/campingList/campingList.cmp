@@ -34,7 +34,7 @@
   <lightning:card title="Items Added" class="slds-container--small">
         <p class="slds-p-horizontal--small">
             <aura:iteration items="{!v.items}" var="myItem">
-                <c:campingListItem item ="{!myItem}"/>
+                <c:campingListItem item="{!myItem}"/>
             </aura:iteration>
         </p>
     </lightning:card>
