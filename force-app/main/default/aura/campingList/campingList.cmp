@@ -1,29 +1,35 @@
-<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global">
+<aura:component controller="CampingListController" implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global">
     <aura:attribute name="items" type="Camping_Item__c[]"/>
-
     <aura:attribute name="newItem" type="Camping_Item__c"
                     default="{'sobjectType' : 'Camping_Item__c', 
                                 'Name' : '',                          
                                 'Quantity__c' : 0,
-                                'Price__c' : 0}"/>
+                                'Price__c' : 0,
+                                'Packed__c' : false}"/>
 
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
   <fieldset class="slds-box slds-theme--default slds-container--small">
     <h1> Adding Camping Item</h1>   
     <form class="slds-form--stacked">
       <div class="slds-form-element slds-is-required">
           <div class="slds-form-element__control">
-            <lightning:input label="Item Name" aura:id="iname" name="itemName" required="true" value="{!v.newItem.Name}"/>
+            <lightning:input label="Item Name" aura:id="newItemForm" name="itemName" required="true" value="{!v.newItem.Name}"/>
           </div>
      </div>     
      <div class="slds-form-element slds-is-required">
           <div class="slds-form-element__control">              
-            <lightning:input label="Quantity" name="itemQuantity" type="number" value="{!v.newItem.Quantity__c}" required="true"/>
+            <lightning:input label="Quantity" name="newItemForm" type="number" value="{!v.newItem.Quantity__c}" required="true"/>
           </div>
       </div>
       <div class="slds-form-element">
           <div class="slds-form-element__control">
-            <lightning:input type="number" aura:id="iprice" name="itemPrice" required="true" label="Price" value="{!v.newItem.Price__c}" formatter="currency" step="0.01"/>
+            <lightning:input type="number" aura:id="newItemForm" name="itemPrice" required="true" label="Price" value="{!v.newItem.Price__c}" formatter="currency" step="0.01"/>
           </div>
+      </div>
+      <div class="slds-form-element">
+        <div class="slds-form-element__control">        
+          <lightning:input type="checkbox" aura:id="newItemForm" name="Packed" label="Packed" checked="{!v.newItem.Packed__c}"/>
+        </div>
       </div>
       <div class="slds-form-element">
         <lightning:button label="Insert Item" class="slds-m-top--medium" variant="brand" onclick="{!c.clickCreateItem}"/>

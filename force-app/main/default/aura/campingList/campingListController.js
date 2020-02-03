@@ -1,17 +1,28 @@
 ({
-    clickCreateItem : function(component , event, helper) {
-        var validFields = component .find('newItemForm').reduce(function (validSoFar, inputCmp) {            
+    doInit: function(component, event, helper){
+        
+        //helper.getItems(component, event, helper);
+
+        let action = component.get("c.getItems");
+        action.setCallback(this, function(response){
+            var state = response.getState();  
+            var data = response.getReturnValue();          
+            if (state === "SUCCESS") {
+              component.set("v.items", data);
+            }
+        });
+        $A.enqueueAction(action);  
+    
+    },
+
+    clickCreateItem : function(component , event, helper) {       
+        var validFields = component.find('newItemForm').reduce(function (validSoFar, inputCmp) { 
             inputCmp.showHelpMessageIfInvalid();
             return validSoFar && inputCmp.get('v.validity').valid;
-        }, true);      
-
+        }, true);          
+    
         if(validFields){           
-            var newItem = component.get("v.newItem");       
-            var campingItems = component.get("v.items");
-            campingItems.push(JSON.parse(JSON.stringify(newItem)));
-            component.set("v.items", campingItems);
-            newItem = {'sObjectType': 'Camping_Item__c', 'Quantity__c': 0, 'Price__c': 0, 'Packed__c': false};
-        	component.set("v.newItem", newItem);
-        }         
-    }
+            helper.createItem(component, event, helper);
+        }           
+    } 
 })
