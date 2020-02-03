@@ -1,15 +1,17 @@
 ({
-    clickCreateItem : function(cmp, event, helper) {
-        var iName = cmp.get("v.newItem.Name");       
-        var iQuantity = cmp.get("v.newItem.Quantity__c");
-        var iPrice = cmp.get("v.newItem.Price__c");
+    clickCreateItem : function(component , event, helper) {
+        var validFields = component .find('newItemForm').reduce(function (validSoFar, inputCmp) {            
+            inputCmp.showHelpMessageIfInvalid();
+            return validSoFar && inputCmp.get('v.validity').valid;
+        }, true);      
 
-
-        var newItemRef = cmp.get("v.newItem");
-        console.log("Create Camping Item: " + JSON.stringify(newItemRef));        
-        var myItems = cmp.get("v.items");
-        myItems.push(newItemRef);
-        console.log("Items in List: " + JSON.stringify(cmp.get("v.items"))); 
-        cmp.set("v.items", myItems);       
+        if(validFields){           
+            var newItem = component.get("v.newItem");       
+            var campingItems = component.get("v.items");
+            campingItems.push(JSON.parse(JSON.stringify(newItem)));
+            component.set("v.items", campingItems);
+            newItem = {'sObjectType': 'Camping_Item__c', 'Quantity__c': 0, 'Price__c': 0, 'Packed__c': false};
+        	component.set("v.newItem", newItem);
+        }         
     }
 })
