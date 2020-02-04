@@ -1,0 +1,36 @@
+<aura:component>
+    
+    <!--Sender event-->
+    <aura:registerEvent name="addItem" type="c:addItemEvent"/>
+
+    <aura:attribute name="newItem" type="Camping_Item__c"  default="{'sobjectType' : 'Camping_Item__c', 
+                                                                                    'Name' : '',                          
+                                                                                    'Quantity__c' : 0,
+                                                                                    'Price__c' : 0,
+                                                                                    'Packed__c' : false}"/>
+    <form class="slds-form--stacked">
+        <div class="slds-form-element slds-is-required">
+            <div class="slds-form-element__control">
+              <lightning:input label="Item Name" aura:id="newItemForm" name="itemName" required="true" value="{!v.newItem.Name}"/>
+            </div>
+       </div>     
+       <div class="slds-form-element slds-is-required">
+            <div class="slds-form-element__control">              
+              <lightning:input label="Quantity" name="newItemForm" type="number" value="{!v.newItem.Quantity__c}" min='1' required="true"/>
+            </div>
+        </div>
+        <div class="slds-form-element">
+            <div class="slds-form-element__control">
+              <lightning:input type="number" aura:id="newItemForm" name="itemPrice" required="true" label="Price" value="{!v.newItem.Price__c}" min='0.0' formatter="currency" step="0.01"/>
+            </div>
+        </div>
+        <div class="slds-form-element">
+          <div class="slds-form-element__control">        
+            <lightning:input type="checkbox" aura:id="newItemForm" name="Packed" label="Packed" checked="{!v.newItem.Packed__c}"/>
+          </div>
+        </div>
+        <div class="slds-form-element">
+          <lightning:button label="Insert Item" class="slds-m-top--medium" variant="brand" onclick="{!c.clickCreateItem}"/>
+        </div>
+      </form>  
+</aura:component>	

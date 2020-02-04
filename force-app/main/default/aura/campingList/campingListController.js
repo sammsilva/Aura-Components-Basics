@@ -1,8 +1,5 @@
 ({
-    doInit: function(component, event, helper){
-        
-        //helper.getItems(component, event, helper);
-
+    doInit: function(component, event, helper){       
         let action = component.get("c.getItems");
         action.setCallback(this, function(response){
             var state = response.getState();  
@@ -13,16 +10,24 @@
         });
         $A.enqueueAction(action);  
     
-    },
+    },   
 
-    clickCreateItem : function(component , event, helper) {       
-        var validFields = component.find('newItemForm').reduce(function (validSoFar, inputCmp) { 
-            inputCmp.showHelpMessageIfInvalid();
-            return validSoFar && inputCmp.get('v.validity').valid;
-        }, true);          
-    
-        if(validFields){           
-            helper.createItem(component, event, helper);
-        }           
-    } 
+    handleAddItem: function(component, event, helper) {
+        var newItem = event.getParam("item");             
+        let campingItems = component.get("v.items");
+        let action = component.get("c.saveItem");             
+        action.setParams({
+            "item": newItem
+        });
+        action.setCallback(this, function(response){
+            var state = response.getState();            
+            if (state === "SUCCESS") {
+                campingItems.push(JSON.parse(JSON.stringify(newItem)));
+                component.set("v.items", campingItems);
+            }
+        });
+        $A.enqueueAction(action);
+
+
+    }
 })
